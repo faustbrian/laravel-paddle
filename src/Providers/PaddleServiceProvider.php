@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace KodeKeep\Paddle\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use KodeKeep\Paddle\Client;
 
 class PaddleServiceProvider extends ServiceProvider
 {
@@ -31,5 +32,10 @@ class PaddleServiceProvider extends ServiceProvider
         }
 
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
+
+        $this->app->singleton(
+            'paddle',
+            fn ($app) => new Client($app['config']['vendor_id'], $app['config']['vendor_auth_code'])
+        );
     }
 }
