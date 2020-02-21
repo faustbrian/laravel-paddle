@@ -1,0 +1,51 @@
+name: Format
+
+on:
+    pull_request:
+        paths:
+            - '**.css'
+            - '**.js'
+            - '**.php'
+            - '**.vue'
+
+jobs:
+    php-cs-fixer:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v1
+              with:
+                  php-version: "7.4"
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+                  coverage: pcov
+
+            - name: Install
+              run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --optimize-autoloader
+
+            - name: Run php-cs-fixer
+              run: composer format
+
+            - uses: stefanzweifel/git-auto-commit-action@v3.0.0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+    prettier:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Install
+              run: yarn install
+              env:
+                  CI: true
+
+            - name: Run prettier
+              run: yarn run prettier --write 'resources/**/*.{css,js,vue}'
+
+            - uses: stefanzweifel/git-auto-commit-action@v3.0.0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
