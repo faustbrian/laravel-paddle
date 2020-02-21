@@ -7,7 +7,7 @@
 [![Quality Score](https://badgen.net/codeclimate/maintainability/kodekeep/laravel-paddle)](https://codeclimate.com/github/kodekeep/laravel-paddle)
 [![Total Downloads](https://badgen.net/packagist/dt/kodekeep/laravel-paddle)](https://packagist.org/packages/kodekeep/laravel-paddle)
 
-This package was created by, and is maintained by [Brian Faust](https://github.com/faustbrian), and provides a Paddle for Laravel.
+This package was created by, and is maintained by [Brian Faust](https://github.com/faustbrian), and provides a Paddle integration for Laravel.
 
 ## Installation
 
