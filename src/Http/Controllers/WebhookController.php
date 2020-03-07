@@ -15,8 +15,9 @@ namespace KodeKeep\Paddle\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use KodeKeep\Paddle\Webhooks\Actions\VerifyWebhook;
-use KodeKeep\Paddle\Webhooks\Events\Event;
+use KodeKeep\Paddle\Webhooks\Events\Event as WebhookEvent;
 
 class WebhookController
 {
@@ -29,7 +30,7 @@ class WebhookController
         );
 
         try {
-            dispatch(Event::new($request->all()));
+            Event::dispatch(WebhookEvent::new($request->all()));
         } catch (\Throwable $th) {
             return $this->missingMethod();
         }

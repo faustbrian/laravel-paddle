@@ -33,7 +33,7 @@ class PaddleServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
 
-        $this->app->singleton('paddle', function ($app){
+        $this->app->singleton('paddle', function ($app) {
             $config = $app['config']['paddle'];
 
             return new Client($config['vendor_id'], $config['vendor_auth_code']);
