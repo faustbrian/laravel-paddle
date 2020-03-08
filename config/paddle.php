@@ -46,4 +46,17 @@ return [
 
     'vendor_public_key' => env('PADDLE_VENDOR_PUBLIC_KEY'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Currency Locale
+    |--------------------------------------------------------------------------
+    |
+    | This is the default locale in which your money values are formatted in
+    | for display. To utilize other locales besides the default en locale
+    | verify you have the "intl" PHP extension installed on the system.
+    |
+    */
+
+    'currency_locale' => env('PADDLE_CURRENCY_LOCALE', 'en'),
+
 ];
