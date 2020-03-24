@@ -52,7 +52,7 @@ trait Billable
             try {
                 $passthrough = \json_decode(decrypt($transaction['passthrough']), true, 512, \JSON_THROW_ON_ERROR);
 
-                return $passthrough['app'] === config('vendor_app');
+                return $passthrough['app'] === config('paddle.vendor_app');
             } catch (\Throwable $th) {
                 return false;
             }

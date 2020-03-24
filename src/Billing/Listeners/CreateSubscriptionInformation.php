@@ -24,7 +24,7 @@ class CreateSubscriptionInformation extends Listener
         // Decrypt and parse the passthrough...
         $passthrough = \json_decode(decrypt($event->passthrough), true, 512, \JSON_THROW_ON_ERROR);
 
-        if ($passthrough['app'] !== config('vendor_app')) {
+        if ($passthrough['app'] !== config('paddle.vendor_app')) {
             throw new Exception('Invalid application in passthrough.');
         }
 
