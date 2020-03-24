@@ -13,8 +13,17 @@ declare(strict_types=1);
 
 namespace KodeKeep\Paddle\Providers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use KodeKeep\Paddle\Billing\Listeners\CreateSubscriptionInformation;
+use KodeKeep\Paddle\Billing\Listeners\DeleteSubscriptionInformation;
+use KodeKeep\Paddle\Billing\Listeners\UpdateSubscriptionInformation;
 use KodeKeep\Paddle\Client;
+use KodeKeep\Paddle\Webhooks\Events\PaymentDisputeCreated;
+use KodeKeep\Paddle\Webhooks\Events\SubscriptionCancelled;
+use KodeKeep\Paddle\Webhooks\Events\SubscriptionCreated;
+use KodeKeep\Paddle\Webhooks\Events\SubscriptionPaymentRefunded;
+use KodeKeep\Paddle\Webhooks\Events\SubscriptionUpdated;
 
 class PaddleServiceProvider extends ServiceProvider
 {
@@ -38,5 +47,16 @@ class PaddleServiceProvider extends ServiceProvider
 
             return new Client($config['vendor_id'], $config['vendor_auth_code']);
         });
+
+        $this->registerEventListeners();
+    }
+
+    public function registerEventListeners(): void
+    {
+        Event::listen(SubscriptionCreated::class, CreateSubscriptionInformation::class);
+        Event::listen(SubscriptionUpdated::class, UpdateSubscriptionInformation::class);
+        Event::listen(SubscriptionCancelled::class, DeleteSubscriptionInformation::class);
+        Event::listen(SubscriptionPaymentRefunded::class, DeleteSubscriptionInformation::class);
+        Event::listen(PaymentDisputeCreated::class, DeleteSubscriptionInformation::class);
     }
 }

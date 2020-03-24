@@ -48,6 +48,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Vendor Public Key
+    |--------------------------------------------------------------------------
+    |
+    | ...
+    |
+    */
+
+    'vendor_app' => env('PADDLE_VENDOR_APP'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Paddle Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the model in your application that implements the Billable trait
+    | provided by Paddle. It will serve as the primary model you use while
+    | interacting with Paddle related methods, subscriptions, and so on.
+    |
+    */
+
+    'model' => env('PADDLE_MODEL', App\Models\User::class),
+
+    /*
+    |--------------------------------------------------------------------------
     | Currency Locale
     |--------------------------------------------------------------------------
     |

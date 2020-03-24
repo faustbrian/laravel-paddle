@@ -19,6 +19,44 @@ composer require kodekeep/laravel-paddle
 
 See our [tests](https://github.com/kodekeep/laravel-paddle/tree/master/tests) for usage examples.
 
+### `Billable`
+
+If you are planning to use the `Billable` trait you'll need to use the following migration to add the necessary columns to the table of your billabled model.
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
+
+class AddPaddleToUsers extends Migration
+{
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('paddle_id')->nullable()->index();
+            $table->unsignedBigInteger('paddle_subscription_id')->nullable()->index();
+            $table->unsignedBigInteger('paddle_subscription_plan_id')->nullable()->index();
+            $table->timestamp('trial_ends_at')->nullable();
+            $table->timestamp('grace_period_ends_at')->nullable();
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('paddle_id');
+            $table->dropColumn('paddle_subscription_id');
+            $table->dropColumn('paddle_subscription_plan_id');
+            $table->dropColumn('trial_ends_at');
+            $table->dropColumn('grace_period_ends_at');
+        });
+    }
+}
+```
+
 ## Testing
 
 ``` bash
