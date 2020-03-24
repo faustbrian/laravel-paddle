@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 1.2.1 - 2020-03-24
+
+### Fixed
+
+- Access paddle.vendor_app instead of vendor_app
+
 ## 1.2.0 - 2020-03-24
 
 ### Added
