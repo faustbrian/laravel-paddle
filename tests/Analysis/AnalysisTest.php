@@ -26,7 +26,6 @@ class AnalysisTest extends TestCase
     public function getPaths(): array
     {
         return [
-            realpath(__DIR__.'/../../config'),
             realpath(__DIR__.'/../../src'),
             realpath(__DIR__),
         ];
