@@ -41,7 +41,7 @@ jobs:
                   composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
             - name: Execute tests & Report coverage
-              uses: paambaati/codeclimate-action@v2.4.0
+              uses: paambaati/codeclimate-action@v2.5.5
               env:
                   CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
               with:
