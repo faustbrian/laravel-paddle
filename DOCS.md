@@ -6,7 +6,27 @@ The Paddle API documentation can be found at https://paddle.com/docs/.
 
 ## Configuration
 
-...
+### Webhooks
+
+First you will need to go to https://vendors.paddle.com/alerts-webhooks and configure your webhook URL. This should point to `https://domain.com/paddle/webhook` with webhook alerts for all `Subscriptions` and `Risk & disputes`.
+
+Next you will need to grab the values for `PADDLE_VENDOR_ID` and `PADDLE_VENDOR_AUTH_CODE` from https://vendors.paddle.com/authentication. Finally you will need to grab the value for `PADDLE_VENDOR_PUBLIC_KEY` from https://vendors.paddle.com/public-key.
+
+Once everything is put together your `.env` file should contain something like the below.
+
+```ini
+PADDLE_VENDOR_ID=123456789
+PADDLE_VENDOR_AUTH_CODE=somelonghashforauthentication
+PADDLE_VENDOR_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----
+supersecretvalueofyourpublickey
+-----END PUBLIC KEY-----"
+```
+
+### Vendor Application Identifier
+
+The `PADDLE_VENDOR_APP` environment variable is not directly by used by Paddle but a value for internal purposes to separate your application data. You might have multiple applications and subscriptions on a single Paddle account to keep your accounting simpler but Paddle itself has no easy way of separating and filter data based on the origin.
+
+For example you could have 5 SaaS applications and you have a customer with the email `john@doe.com` on all of them. Now if you would list invoices from Paddle you could end up with mixed up invoices from multiple applications. To solve this issue you can use the `PADDLE_VENDOR_APP` environment variable and set it to something like `PADDLE_VENDOR_APP=myapp`. This will ensure that listed invoices and incoming webhook data belong to the correct application.
 
 ## Webhooks
 
