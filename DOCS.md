@@ -24,7 +24,7 @@ supersecretvalueofyourpublickey
 
 ### Vendor Application Identifier
 
-The `PADDLE_VENDOR_APP` environment variable is not directly by used by Paddle but a value for internal purposes to separate your application data. You might have multiple applications and subscriptions on a single Paddle account to keep your accounting simpler but Paddle itself has no easy way of separating and filter data based on the origin.
+The `PADDLE_VENDOR_APP` environment variable is not directly used by Paddle but a value for internal purposes to separate your application data. You might have multiple applications and subscriptions on a single Paddle account to keep your accounting simpler but Paddle itself has no easy way of separating and filter data based on the origin.
 
 For example you could have 5 SaaS applications and you have a customer with the email `john@doe.com` on all of them. Now if you would list invoices from Paddle you could end up with mixed up invoices from multiple applications. To solve this issue you can use the `PADDLE_VENDOR_APP` environment variable and set it to something like `PADDLE_VENDOR_APP=myapp`. This will ensure that listed invoices and incoming webhook data belong to the correct application.
 
@@ -109,88 +109,66 @@ class AddPaddleToUsers extends Migration
 
 ### Get the currently active subscription
 
-...
-
 ```php
-...
+$user->subscription();
 ```
 
 ### Swap to another subscription plan
 
-...
-
 ```php
-...
+$user->swapPlan(123456);
 ```
 
-### Cancel the currently active subscription
-
-...
+### Immediately cancel the currently active subscription
 
 ```php
-...
+$user->cancelNow();
 ```
 
 ### List all invoices that match the current application
 
-...
-
 ```php
-...
+$user->invoices();
 ```
 
 ### Check if the model is currently on trial
 
-...
-
 ```php
-...
+$user->onTrial();
 ```
 
 ### Check if the model is currently on its grace period
 
-...
-
 ```php
-...
+$user->onGracePeriod();
 ```
 
 ### Check if the model is currently subscribed to any plan
 
-...
-
 ```php
-...
+$user->subscribed();
 ```
 
 ### Check if the model is currently subscribed to a specific plan
 
-...
-
 ```php
-...
+$user->subscribedToPlan(123456);
 ```
 
 ### Check if the model has a paddle ID
 
-...
-
 ```php
-...
+$user->hasPaddleId();
 ```
 
 ### Check if the mdoel has a paddle subscription ID
 
-...
-
 ```php
-...
+$user->hasPaddleSubscriptionId();
 ```
 
 ### Check if the model has a paddle subscription plan ID
 
-...
-
 ```php
-...
+$user->hasPaddleSubscriptionPlanId();
 ```
