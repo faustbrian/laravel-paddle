@@ -52,7 +52,7 @@
                 "KodeKeep\\Paddle\\Providers\\PaddleServiceProvider"
             ],
             "aliases": {
-                "Paddle": "KodeKeep\\Paddle\\PaddleFacade"
+                "Paddle": "KodeKeep\\Paddle\\Facade\\Paddle"
             }
         }
     },
