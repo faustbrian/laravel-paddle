@@ -29,7 +29,6 @@ class ClearPastDueGracePeriods extends Command
         $model::whereNotNull('grace_period_ends_at')->each(function ($team) {
             if (Carbon::now()->isPast($team->grace_period_ends_at)) {
                 $team->forceFill([
-                    'paddle_id'                   => null,
                     'paddle_subscription_id'      => null,
                     'paddle_subscription_plan_id' => null,
                     'trial_ends_at'               => null,
