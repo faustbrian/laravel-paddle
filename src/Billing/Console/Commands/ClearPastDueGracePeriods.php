@@ -16,18 +16,18 @@ namespace KodeKeep\Paddle\Billing\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class ClearPastDueTrials extends Command
+class ClearPastDueGracePeriods extends Command
 {
-    protected $signature = 'clear:trials';
+    protected $signature = 'clear:grace-periods';
 
-    protected $description = 'Reset the trial ending dates of all models.';
+    protected $description = 'Reset the grace period ending dates of all models.';
 
     public function handle()
     {
         $model = config('paddle.model');
 
-        $model::whereNotNull('trial_ends_at')->each(function ($team) {
-            if (Carbon::now()->isPast($team->trial_ends_at)) {
+        $model::whereNotNull('grace_period_ends_at')->each(function ($team) {
+            if (Carbon::now()->isPast($team->grace_period_ends_at)) {
                 $team->forceFill([
                     'paddle_id'                   => null,
                     'paddle_subscription_id'      => null,
