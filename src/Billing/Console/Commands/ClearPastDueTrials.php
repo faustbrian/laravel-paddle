@@ -28,7 +28,12 @@ class ClearPastDueTrials extends Command
 
         $model::whereNotNull('trial_ends_at')->each(function ($team) {
             if (Carbon::now()->isPast($team->trial_ends_at)) {
-                $team->forceFill(['trial_ends_at' => null])->save();
+                $team->forceFill([
+                    'paddle_id'                   => null,
+                    'paddle_subscription_id'      => null,
+                    'paddle_subscription_plan_id' => null,
+                    'trial_ends_at'               => null,
+                ])->save();
             }
         });
     }
