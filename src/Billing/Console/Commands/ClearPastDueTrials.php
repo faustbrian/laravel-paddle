@@ -27,7 +27,7 @@ class ClearPastDueTrials extends Command
         $model = config('paddle.model');
 
         $model::whereNotNull('trial_ends_at')->each(function ($team) {
-            if (Carbon::now()->isPast($team->trial_ends_at)) {
+            if ($team->trial_ends_at->isPast()) {
                 $team->forceFill([
                     'paddle_subscription_id'      => null,
                     'paddle_subscription_plan_id' => null,
