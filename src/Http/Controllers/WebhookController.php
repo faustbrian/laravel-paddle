@@ -23,16 +23,14 @@ class WebhookController
 {
     public function handleWebhook(Request $request, VerifyWebhook $action)
     {
-        $payload = collect($request->json()->all());
-
         $action->execute(
             config('paddle.vendor_public_key'),
-            $request->json('p_signature'),
-            $payload->reject(function ($value, $key) { return $key === 'p_signature'; })->all()
+            $request->get('p_signature'),
+            $request->except('p_signature')
         );
 
         try {
-            Event::dispatch(WebhookEvent::new($payload->all()));
+            Event::dispatch(WebhookEvent::new($request->all()));
         } catch (\Throwable $th) {
             return $this->missingMethod();
         }
